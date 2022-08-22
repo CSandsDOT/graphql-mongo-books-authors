@@ -1,0 +1,36 @@
+const { gql } = require('apollo-server-express')
+
+const typeDefs = gql`
+    type Book{
+        id: ID
+        title: String!
+        description: String
+        authorId: String!
+    }
+    type Author{
+        id: ID
+        name: String!
+        bio: String
+    }
+    type Query{
+        getAllBooks: [Book]
+        getBookById(id: ID): Book
+        getAllAuthors: [Author]
+        getAuthorById(id: ID): Author
+    }
+    input BookInput{
+        title: String
+        description: String
+        authorId: String
+    }
+    input AuthorInput{
+        name: String
+        bio: String
+    }
+    type Mutation{
+        addBook(book: BookInput): Book
+        addAuthor(name: String, bio: String): Author
+    }
+`
+
+module.exports = typeDefs
